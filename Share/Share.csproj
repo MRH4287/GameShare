@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B5D312AB-CEEC-4BD7-8932-C201EF380F91}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Share</RootNamespace>
+    <AssemblyName>Share</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Share.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GraphicLibary">
+      <HintPath>..\Lib\GraphicLibary.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>Mysql\MySql.Data.dll</HintPath>
+      <Aliases>global</Aliases>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Communication\ClassContainer.cs" />
+    <Compile Include="Communication\Command.cs" />
+    <Compile Include="Communication\Translator.cs" />
+    <Compile Include="Game\Data\PlanetNames.cs" />
+    <Compile Include="Game\Node.cs" />
+    <Compile Include="Game\RelationState.cs" />
+    <Compile Include="Game\Build-Ship.cs" />
+    <Compile Include="Game\Build-Stats.cs" />
+    <Compile Include="Game\Forschung.cs" />
+    <Compile Include="Game\GameData.cs" />
+    <Compile Include="Game\Interface\DatabaseEntry.cs" />
+    <Compile Include="Game\Interface\Fighter.cs" />
+    <Compile Include="Game\Interface\GameException.cs" />
+    <Compile Include="Game\Planet.cs" />
+    <Compile Include="Game\PlanetClass.cs" />
+    <Compile Include="Game\Race.cs" />
+    <Compile Include="Game\Resources.cs" />
+    <Compile Include="Game\Ship.cs" />
+    <Compile Include="Game\ShipClass.cs" />
+    <Compile Include="Game\Skill.cs" />
+    <Compile Include="Game\Solarsystem.cs" />
+    <Compile Include="Game\Station.cs" />
+    <Compile Include="Game\StationClass.cs" />
+    <Compile Include="Game\Tech.cs" />
+    <Compile Include="Game\Update.cs" />
+    <Compile Include="Game\User.cs" />
+    <Compile Include="Mysql\IMysql.cs" />
+    <Compile Include="Mysql\MysqlConnector.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
