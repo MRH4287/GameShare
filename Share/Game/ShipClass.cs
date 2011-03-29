@@ -138,10 +138,10 @@ namespace Game.Game
         /// </summary>
         /// <param name="ID">ID</param>
         /// <param name="data">GameData</param>
-        /// <returns>ShippClass</returns>
+        /// <returns>ShipClass</returns>
         public static ShipClass create(int ID, GameData data)
         {
-            MySqlDataReader Reader = data.Query("SELECT * FROM `PX_shipps` WHERE `ID` = '" + ID + "'");
+            MySqlDataReader Reader = data.Query("SELECT * FROM `PX_ships` WHERE `ID` = '" + ID + "'");
             Reader.Read();
 
 
@@ -168,7 +168,7 @@ namespace Game.Game
             string skillsS = (string)Reader["skills"];
             string raceS = (string)Reader["race"];
 
-            byte[] picture = (byte[])Reader["bild"];
+            byte[] picture = (byte[])Reader["picture"];
 
             ShipClass ship = new ShipClass(ID, name);
 

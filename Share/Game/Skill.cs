@@ -122,7 +122,7 @@ namespace Game.Game
             string skillS = (string)Reader["skill"];
 
             bool passiv = ((int)Reader["passiv"] ==1);
-            bool ship = ((int)Reader["shipp"] == 1);
+            bool ship = ((int)Reader["ship"] == 1);
             bool stat = ((int)Reader["stat"] == 1);
             bool troop = ((int)Reader["troop"] == 1);
 

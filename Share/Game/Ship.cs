@@ -9,7 +9,7 @@ using Game.Game.Interface;
 namespace Game.Game
 {
     /// <summary>
-    /// Shipp Klasse
+    /// Ship Klasse
     /// Repräsentiert ein mommentan exsistierendes Schiff
     /// </summary>
     [Serializable]

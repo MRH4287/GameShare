@@ -185,7 +185,7 @@ namespace Game.Game
             update.resistend2 = resistend2;
             update.resistend3 = resistend3;
             update.resistend4 = resistend4;
-            update.shiptype = data.getShipType((int)Reader["shipptype"]);
+            update.shiptype = data.getShipType((int)Reader["shiptype"]);
             update.stattype = data.getStationType((int)Reader["stattype"]);
             // update.trooptype = data.getTroopType((int)Reader["trooptype"]);
 
