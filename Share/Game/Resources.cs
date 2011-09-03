@@ -76,7 +76,7 @@ namespace Game.Game
         /// Fügt die Daten der Resourcen in eine HashTabel ein, um Sie in die Datenbank zu speichern
         /// </summary>
         /// <param name="table">HashTable in die die Liste gespeichert werden soll</param>
-        public void addIntoHashTable(System.Collections.Hashtable table)
+        public void addIntoHashTable(Dictionary<string,string> table)
         {
             string tmp = "";
 

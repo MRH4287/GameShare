@@ -20,34 +20,34 @@ namespace Game.Game
 
         List<User> users = new List<User>();
 
-        Hashtable shipTypes = new Hashtable();
+        Dictionary<int, ShipClass> shipTypes = new Dictionary<int, ShipClass>();
         List<Ship> ships = new List<Ship>();
 
         List<Station> stations = new List<Station>();
-        Hashtable stationTypes = new Hashtable();
+        Dictionary<int, StationClass> stationTypes = new Dictionary<int, StationClass>();
 
         /// <summary>
         /// Die Liste aller Planeten
         /// </summary>
         public List<Planet> planets = new List<Planet>();
-        Hashtable planetTypes = new Hashtable();
+        Dictionary<int, PlanetClass> planetTypes = new Dictionary<int, PlanetClass>();
 
         //  List<Troop> troops = new List<Troop>();
         //  Hashtable troopTypes = new Hashtable();
 
-        Hashtable techs = new Hashtable();
+        Dictionary<int, Tech> techs = new Dictionary<int, Tech>();
 
-        Hashtable races = new Hashtable();
+        Dictionary<int, Race> races = new Dictionary<int, Race>();
 
-        Hashtable skills = new Hashtable();
+        Dictionary<int, Skill> skills = new Dictionary<int, Skill>();
 
-        Hashtable updates = new Hashtable();
+        Dictionary<int, Update> updates = new Dictionary<int, Update>();
 
         /// <summary>
         /// Die Mysql Verbindung
         /// </summary>
         [NonSerialized()]
-        public MysqlConnect.MysqlConnector connection = null;
+        public Mysql.MysqlConnection connection = null;
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Game.Game
         /// </summary>
         /// <param name="connection">Verbindung</param>
         /// <param name="prefix">Prefix</param>
-        public GameData(MysqlConnect.MysqlConnector connection, string prefix)
+        public GameData(Mysql.MysqlConnection connection, string prefix)
         {
             //Stellt eine Verbindung zum Server her
             this.connection = connection;
@@ -112,35 +112,28 @@ namespace Game.Game
         /// </summary>
         public void updateData()
         {
-            foreach (DictionaryEntry station in stationTypes)
+            foreach (KeyValuePair<int, StationClass> station in stationTypes)
             {
-                ((StationClass)(station.Value)).updateData(this);
+                station.Value.updateData(this);
             }
 
-            foreach (DictionaryEntry ship in shipTypes)
+            foreach (KeyValuePair<int, ShipClass> ship in shipTypes)
             {
-                ((ShipClass)(ship.Value)).updateData(this);
+                ship.Value.updateData(this);
             }
 
-            foreach (DictionaryEntry planet in planetTypes)
+            foreach (KeyValuePair<int, PlanetClass> planet in planetTypes)
             {
-                ((PlanetClass)(planet.Value)).updateData(this);
+                planet.Value.updateData(this);
+            }
+            foreach (KeyValuePair<int, Tech> tech in techs)
+            {
+                tech.Value.updateData(this);
             }
 
-
-            /*   foreach (DictionaryEntry troop in troopTypes)
-               {
-                   ((TroopClass)(troop.Value)).updateData(this);
-               }  */
-
-            foreach (DictionaryEntry tech in techs)
+            foreach (KeyValuePair<int, Update> update in updates)
             {
-                ((Tech)(tech.Value)).updateData(this);
-            }
-
-            foreach (DictionaryEntry update in updates)
-            {
-                ((Update)(update.Value)).updateData(this);
+                update.Value.updateData(this);
             }
 
         }
@@ -539,12 +532,12 @@ namespace Game.Game
         public List<Update> getUpdates()
         {
             List<Update> list = new List<Update>();
-            foreach (DictionaryEntry entry in updates)
+            foreach (KeyValuePair<int, Update> entry in updates)
             {
-                list.Add((Update)entry.Value);
-                list.Sort();
+                list.Add(entry.Value);
             }
 
+            list.Sort();
             return list;
         }
 
@@ -555,12 +548,12 @@ namespace Game.Game
         public List<StationClass> getStationTypes()
         {
             List<StationClass> list = new List<StationClass>();
-            foreach (DictionaryEntry entry in stationTypes)
+            foreach (KeyValuePair<int, StationClass> entry in stationTypes)
             {
-                list.Add((StationClass)entry.Value);
-                list.Sort();
+                list.Add(entry.Value);
             }
 
+            list.Sort();
             return list;
         }
 
@@ -571,11 +564,11 @@ namespace Game.Game
         public List<Skill> getSkills()
         {
             List<Skill> list = new List<Skill>();
-            foreach (DictionaryEntry entry in skills)
+            foreach (KeyValuePair<int, Skill> entry in skills)
             {
-                list.Add((Skill)entry.Value);
-                list.Sort();
+                list.Add(entry.Value);
             }
+            list.Sort();
 
             return list;
         }
@@ -587,12 +580,12 @@ namespace Game.Game
         public List<Race> getRaces()
         {
             List<Race> list = new List<Race>();
-            foreach (DictionaryEntry entry in races)
+            foreach (KeyValuePair<int, Race> entry in races)
             {
-                list.Add((Race)entry.Value);
-                list.Sort();
-            }
+                list.Add(entry.Value);
 
+            }
+            list.Sort();
             return list;
         }
 
@@ -603,9 +596,9 @@ namespace Game.Game
         public List<ShipClass> getShipTypes()
         {
             List<ShipClass> list = new List<ShipClass>();
-            foreach (DictionaryEntry entry in shipTypes)
+            foreach (KeyValuePair<int,ShipClass> entry in shipTypes)
             {
-                list.Add((ShipClass)entry.Value);
+                list.Add(entry.Value);
                 list.Sort();
             }
 
@@ -619,13 +612,12 @@ namespace Game.Game
         public List<Tech> getTechs()
         {
             List<Tech> list = new List<Tech>();
-            foreach (DictionaryEntry entry in techs)
+            foreach (KeyValuePair<int,Tech> entry in techs)
             {
-                list.Add((Tech)entry.Value);
-                list.Sort();
-
+                list.Add(entry.Value);
+               
             }
-
+            list.Sort();
             return list;
         }
 
@@ -637,12 +629,12 @@ namespace Game.Game
         public List<PlanetClass> getPlanetTypes()
         {
             List<PlanetClass> list = new List<PlanetClass>();
-            foreach (DictionaryEntry entry in planetTypes)
+            foreach (KeyValuePair<int,PlanetClass> entry in planetTypes)
             {
-                list.Add((PlanetClass)entry.Value);
-                list.Sort();
+                list.Add(entry.Value);
+               
             }
-
+            list.Sort();
             return list;
         }
 
@@ -835,51 +827,6 @@ namespace Game.Game
             }
         }
 
-
-
-        /// <summary>
-        /// Aktualisiert eine Tabelle
-        /// </summary>
-        /// <param name="table">Zu aktualisierende Tabelle</param>
-        /// <param name="hash">Werte die verändert werden</param>
-        /// <param name="BedName">WHERE `# Dieser Wert #` = '...'</param>
-        /// <param name="BedValue">WHERE `...` = '# Dieser Wert #'</param>
-        public void updateTable(string table, System.Collections.Hashtable hash, string BedName, string BedValue)
-        {
-            table = table.Replace("PX_", prefix);
-
-            connection.updateTable(table, hash, BedName, BedValue);
-
-
-        }
-
-        /// <summary>
-        /// Aktualisiert eine Tabelle
-        /// </summary>
-        /// <param name="table">Zu aktualisierende Tabelle</param>
-        /// <param name="hash">Werte die verändert werden</param>
-        public void replaceIntoTable(string table, System.Collections.Hashtable hash)
-        {
-            table = table.Replace("PX_", prefix);
-
-            connection.ReplaceInto(table, hash);
-
-
-        }
-
-        /// <summary>
-        /// Fügt einen Eintrag in eine Tabelle ein
-        /// </summary>
-        /// <param name="table">Tabelle</param>
-        /// <param name="hash">Werte</param>
-        public void addEntry(string table, System.Collections.Hashtable hash)
-        {
-            table = table.Replace("PX_", prefix);
-
-            connection.addEntry(table, hash);
-        }
-
-
         /// <summary>
         /// Läd die Spiel Dateien aus einer Datei
         /// </summary>
@@ -891,14 +838,13 @@ namespace Game.Game
 
             List<ClassContainer> list = tr.readData(filename);
 
-            planetTypes = new Hashtable();
-            races = new Hashtable();
-            shipTypes = new Hashtable();
-            skills = new Hashtable();
-            stationTypes = new Hashtable();
-            techs = new Hashtable();
-            // troopTypes = new Hashtable();
-            updates = new Hashtable();
+            planetTypes = new Dictionary<int, PlanetClass>();
+            races = new Dictionary<int, Race>();
+            shipTypes = new Dictionary<int, ShipClass>();
+            skills = new Dictionary<int, Skill>();
+            stationTypes = new Dictionary<int, StationClass>();
+            techs = new Dictionary<int, Tech>();
+            updates = new Dictionary<int, Update>();
 
             foreach (ClassContainer Container in list)
             {
@@ -971,7 +917,7 @@ namespace Game.Game
             List<ClassContainer> list = new List<ClassContainer>();
 
 
-            foreach (DictionaryEntry station in stationTypes)
+            foreach (KeyValuePair<int,StationClass> station in stationTypes)
             {
                 ClassContainer container = new ClassContainer();
                 container.type = ClassType.StationClass;
@@ -981,7 +927,7 @@ namespace Game.Game
                 list.Add(container);
             }
 
-            foreach (DictionaryEntry ship in shipTypes)
+            foreach (KeyValuePair<int,ShipClass> ship in shipTypes)
             {
                 ClassContainer container = new ClassContainer();
                 container.type = ClassType.ShipClass;
@@ -991,7 +937,7 @@ namespace Game.Game
                 list.Add(container);
             }
 
-            foreach (DictionaryEntry planet in planetTypes)
+            foreach (KeyValuePair<int,PlanetClass> planet in planetTypes)
             {
                 ClassContainer container = new ClassContainer();
                 container.type = ClassType.PlanetClass;
@@ -1001,18 +947,7 @@ namespace Game.Game
                 list.Add(container);
             }
 
-
-            /*   foreach (DictionaryEntry troop in troopTypes)
-               {
-                   ClassContainer container = new ClassContainer();
-                   container.type = ClassType.TroopClass;
-         
-                   container.objekt = troop.Value;
-          
-                  list.Add(container);
-               }   */
-
-            foreach (DictionaryEntry tech in techs)
+            foreach (KeyValuePair<int,Tech> tech in techs)
             {
                 ClassContainer container = new ClassContainer();
                 container.type = ClassType.Tech;
@@ -1022,7 +957,7 @@ namespace Game.Game
                 list.Add(container);
             }
 
-            foreach (DictionaryEntry update in updates)
+            foreach (KeyValuePair<int,Update> update in updates)
             {
                 ClassContainer container = new ClassContainer();
                 container.type = ClassType.Update;
@@ -1034,7 +969,7 @@ namespace Game.Game
 
 
 
-            foreach (DictionaryEntry skill in skills)
+            foreach (KeyValuePair<int,Skill> skill in skills)
             {
                 ClassContainer container = new ClassContainer();
                 container.type = ClassType.Skill;
@@ -1045,7 +980,7 @@ namespace Game.Game
             }
 
 
-            foreach (DictionaryEntry race in races)
+            foreach (KeyValuePair<int,Race> race in races)
             {
                 ClassContainer container = new ClassContainer();
                 container.type = ClassType.Race;
